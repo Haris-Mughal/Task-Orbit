@@ -114,8 +114,12 @@ const Dashboard: React.FC = () => {
         {/* Welcome Section */}
         <div className={`text-center py-8 bg-gradient-to-br ${moodTheme.secondary} rounded-2xl border-2 border-white/50 backdrop-blur-sm`}>
           <div className="flex justify-center mb-4">
-            <div className={`w-16 h-16 bg-gradient-to-br ${moodTheme.primary} rounded-2xl flex items-center justify-center shadow-lg`}>
-              <Rocket className="w-8 h-8 text-white" />
+            <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg p-2">
+              <img 
+                src="/Untitled_design__4_-removebg-preview.png" 
+                alt="TaskOrbit" 
+                className="w-full h-full object-contain"
+              />
             </div>
           </div>
           <h2 className={`text-3xl md:text-4xl font-bold ${moodTheme.text} mb-2`}>

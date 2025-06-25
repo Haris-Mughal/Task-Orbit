@@ -1,5 +1,6 @@
 import React from 'react';
-import { Home, CheckSquare, Timer, Heart, Trophy } from 'lucide-react';
+import { Home, CheckSquare, Timer, Heart, Trophy, LogOut } from 'lucide-react';
+import { useAuth } from '../hooks/useAuth';
 
 interface NavigationProps {
   activeTab: string;
@@ -7,6 +8,8 @@ interface NavigationProps {
 }
 
 const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
+  const { user, signOut } = useAuth();
+
   const tabs = [
     { id: 'dashboard', label: 'Dashboard', icon: Home },
     { id: 'tasks', label: 'Tasks', icon: CheckSquare },
@@ -14,6 +17,14 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
     { id: 'mood', label: 'Mood', icon: Heart },
     { id: 'achievements', label: 'Achievements', icon: Trophy },
   ];
+
+  const handleLogout = async () => {
+    try {
+      await signOut();
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
 
   return (
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 backdrop-blur-sm bg-white/95">
@@ -30,7 +41,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-1">
+          <div className="hidden md:flex items-center space-x-1">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               return (
@@ -50,6 +61,17 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
                 </button>
               );
             })}
+            
+            {/* Logout Button */}
+            {user && (
+              <button
+                onClick={handleLogout}
+                className="flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-600 hover:text-red-600 hover:bg-red-50 ml-2"
+              >
+                <LogOut size={18} />
+                <span>Logout</span>
+              </button>
+            )}
           </div>
         </div>
 
@@ -75,6 +97,17 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
                 </button>
               );
             })}
+            
+            {/* Mobile Logout Button */}
+            {user && (
+              <button
+                onClick={handleLogout}
+                className="flex flex-col items-center space-y-1 px-2 py-2 rounded-lg transition-all duration-200 text-gray-500 hover:text-red-600"
+              >
+                <LogOut size={20} />
+                <span className="text-xs font-medium">Logout</span>
+              </button>
+            )}
           </div>
         </div>
       </div>

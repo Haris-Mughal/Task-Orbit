@@ -89,7 +89,41 @@ export function useTasks(userId?: string) {
     const task = tasks.find(t => t.id === id);
     if (!task) return;
 
-    return updateTask(id, { completed: !task.completed });
+    const result = await updateTask(id, { completed: !task.completed });
+    
+    // If task was just completed, check for streak increment
+    if (!task.completed && result.data?.completed) {
+      await checkAndUpdateStreak();
+    }
+    
+    return result;
+  };
+
+  const checkAndUpdateStreak = async () => {
+    try {
+      // Check if user has completed at least one task today
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const tomorrow = new Date(today);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+
+      const todayTasks = tasks.filter(task => {
+        const taskDate = new Date(task.created_at);
+        return taskDate >= today && taskDate < tomorrow && task.completed;
+      });
+
+      if (todayTasks.length > 0) {
+        // Update user's last login to today and potentially increment streak
+        const { error } = await supabase
+          .from('users')
+          .update({ last_login: new Date().toISOString() })
+          .eq('id', userId!);
+
+        if (error) throw error;
+      }
+    } catch (err) {
+      console.error('Error updating streak:', err);
+    }
   };
 
   return {

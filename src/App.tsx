@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useAuth } from './hooks/useAuth';
+import { useUser } from './hooks/useUser';
+import { useMoodPersonalization } from './hooks/useMoodPersonalization';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import Dashboard from './components/pages/Dashboard';
@@ -9,6 +12,9 @@ import Achievements from './components/pages/Achievements';
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
+  const { user } = useAuth();
+  const { profile } = useUser(user?.id);
+  const { getMoodTheme } = useMoodPersonalization();
 
   const renderActiveTab = () => {
     switch (activeTab) {
@@ -27,8 +33,12 @@ function App() {
     }
   };
 
+  // Get mood-based theme
+  const currentMood = profile?.mood || 'neutral';
+  const moodTheme = getMoodTheme(currentMood);
+
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className={`min-h-screen flex flex-col ${currentMood !== 'neutral' ? moodTheme.background : 'bg-gray-50'}`}>
       <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
       
       <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

@@ -1,45 +1,99 @@
 import React from 'react';
-import { Plus, Search } from 'lucide-react';
+import { useAuth } from '../../hooks/useAuth';
+import { useTasks } from '../../hooks/useTasks';
+import TaskInput from '../TaskInput';
+import TaskList from '../TaskList';
+import AuthForm from '../AuthForm';
 
 const Tasks: React.FC = () => {
+  const { user, loading: authLoading } = useAuth();
+  const { 
+    tasks, 
+    loading: tasksLoading, 
+    createTask, 
+    toggleTask, 
+    deleteTask 
+  } = useTasks(user?.id);
+
+  const handleTaskCreated = async (taskData: any) => {
+    const result = await createTask(taskData);
+    if (result.error) {
+      console.error('Error creating task:', result.error);
+    }
+  };
+
+  const handleToggleTask = async (id: string) => {
+    const result = await toggleTask(id);
+    if (result?.error) {
+      console.error('Error toggling task:', result.error);
+    }
+  };
+
+  const handleDeleteTask = async (id: string) => {
+    const result = await deleteTask(id);
+    if (result.error) {
+      console.error('Error deleting task:', result.error);
+    }
+  };
+
+  if (authLoading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <AuthForm />;
+  }
+
   return (
     <div className="space-y-6">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
-        <div>
-          <h2 className="text-2xl font-bold text-gray-900">Tasks</h2>
-          <p className="text-gray-600">Manage your tasks with AI-powered organization</p>
-        </div>
-        <button className="inline-flex items-center space-x-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors duration-200 shadow-sm">
-          <Plus size={18} />
-          <span>Add Task</span>
-        </button>
+      <div className="text-center">
+        <h2 className="text-2xl font-bold text-gray-900">Tasks</h2>
+        <p className="text-gray-600">Manage your tasks with AI-powered organization</p>
       </div>
 
-      {/* Search and Filters */}
-      <div className="bg-white p-4 rounded-xl border border-gray-200">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
-          <input
-            type="text"
-            placeholder="Search tasks or add using natural language..."
-            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-          />
-        </div>
+      {/* Task Input */}
+      <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+        <TaskInput 
+          onTaskCreated={handleTaskCreated}
+          loading={tasksLoading}
+        />
       </div>
 
-      {/* Empty State */}
-      <div className="bg-white p-8 rounded-xl border border-gray-200">
-        <div className="text-center py-12">
-          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Plus className="w-8 h-8 text-gray-400" />
+      {/* Task Statistics */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="bg-white p-4 rounded-lg border border-gray-200 text-center">
+          <div className="text-2xl font-bold text-purple-600">
+            {tasks.filter(t => !t.completed).length}
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No tasks yet</h3>
-          <p className="text-gray-600 mb-6">Start by adding your first task using natural language</p>
-          <button className="inline-flex items-center space-x-2 px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors duration-200">
-            <Plus size={18} />
-            <span>Create First Task</span>
-          </button>
+          <div className="text-sm text-gray-600">Active Tasks</div>
         </div>
+        <div className="bg-white p-4 rounded-lg border border-gray-200 text-center">
+          <div className="text-2xl font-bold text-green-600">
+            {tasks.filter(t => t.completed).length}
+          </div>
+          <div className="text-sm text-gray-600">Completed</div>
+        </div>
+        <div className="bg-white p-4 rounded-lg border border-gray-200 text-center">
+          <div className="text-2xl font-bold text-gray-900">
+            {tasks.length}
+          </div>
+          <div className="text-sm text-gray-600">Total Tasks</div>
+        </div>
+      </div>
+
+      {/* Task List */}
+      <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Your Tasks</h3>
+        <TaskList
+          tasks={tasks}
+          onToggleTask={handleToggleTask}
+          onDeleteTask={handleDeleteTask}
+          loading={tasksLoading}
+        />
       </div>
     </div>
   );

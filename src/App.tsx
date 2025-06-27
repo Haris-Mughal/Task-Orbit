@@ -10,6 +10,7 @@ import Tasks from './components/pages/Tasks';
 import Timer from './components/pages/Timer';
 import Mood from './components/pages/Mood';
 import Achievements from './components/pages/Achievements';
+import Settings from './components/pages/Settings';
 import AuthForm from './components/AuthForm';
 
 function App() {
@@ -58,6 +59,8 @@ function App() {
         return <Mood />;
       case 'achievements':
         return <Achievements />;
+      case 'settings':
+        return <Settings />;
       default:
         return <Dashboard />;
     }

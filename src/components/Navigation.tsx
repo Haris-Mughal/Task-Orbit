@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, CheckSquare, Timer, Heart, Trophy, LogOut, Sun, Moon } from 'lucide-react';
+import { Home, CheckSquare, Timer, Heart, Trophy, LogOut, Sun, Moon, Settings } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 
 interface NavigationProps {
@@ -23,6 +23,7 @@ const Navigation: React.FC<NavigationProps> = ({
     { id: 'timer', label: 'Timer', icon: Timer },
     { id: 'mood', label: 'Mood', icon: Heart },
     { id: 'achievements', label: 'Achievements', icon: Trophy },
+    { id: 'settings', label: 'Settings', icon: Settings },
   ];
 
   const handleLogout = async () => {
@@ -92,8 +93,8 @@ const Navigation: React.FC<NavigationProps> = ({
 
         {/* Mobile Navigation */}
         <div className="md:hidden border-t border-gray-100 dark:border-gray-700">
-          <div className="flex justify-around py-2">
-            {tabs.map((tab) => {
+          <div className="grid grid-cols-3 gap-1 py-2">
+            {tabs.slice(0, 6).map((tab) => {
               const Icon = tab.icon;
               return (
                 <button

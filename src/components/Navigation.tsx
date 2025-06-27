@@ -33,9 +33,9 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
           {/* Logo */}
           <div className="flex items-center space-x-3">
             <img 
-              src="/Untitled_design__1_-removebg-preview (1).png" 
+              src="/Untitled_design__4_-removebg-preview.png" 
               alt="TaskOrbit" 
-              className="h-10 w-auto"
+              className="h-16 w-auto"
             />
           </div>
 

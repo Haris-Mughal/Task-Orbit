@@ -38,7 +38,7 @@ const AuthForm: React.FC = () => {
         <div className="text-center mb-6">
           <div className="flex justify-center mb-4">
             <img 
-              src="/Untitled_design__4_-removebg-preview.png" 
+              src="/Untitled_design__1_-removebg-preview (1).png" 
               alt="TaskOrbit" 
               className="h-16 w-auto"
             />

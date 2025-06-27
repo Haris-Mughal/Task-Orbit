@@ -61,10 +61,10 @@ function App() {
     <div className={`min-h-screen flex flex-col ${currentMood !== 'neutral' ? moodTheme.background : 'bg-gray-50'}`}>
       <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
       
-      {/* Bolt.new Badge */}
-      <BoltBadge />
-      
-      <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative">
+        {/* Bolt.new Badge - positioned in body section */}
+        <BoltBadge />
+        
         {renderActiveTab()}
       </main>
       

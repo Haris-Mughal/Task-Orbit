@@ -9,10 +9,11 @@ import Tasks from './components/pages/Tasks';
 import Timer from './components/pages/Timer';
 import Mood from './components/pages/Mood';
 import Achievements from './components/pages/Achievements';
+import AuthForm from './components/AuthForm';
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const { profile } = useUser(user?.id);
   const { getMoodTheme } = useMoodPersonalization();
 
@@ -33,7 +34,25 @@ function App() {
     }
   };
 
-  // Get mood-based theme
+  // Show loading state
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
+      </div>
+    );
+  }
+
+  // Show auth form without header/footer if user is not authenticated
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <AuthForm />
+      </div>
+    );
+  }
+
+  // Get mood-based theme for authenticated users
   const currentMood = profile?.mood || 'neutral';
   const moodTheme = getMoodTheme(currentMood);
 

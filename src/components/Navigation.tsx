@@ -24,7 +24,7 @@ const Navigation: React.FC<NavigationProps> = ({
     { id: 'timer', label: 'Timer', icon: Timer },
     { id: 'mood', label: 'Mood', icon: Heart },
     { id: 'achievements', label: 'Achievements', icon: Trophy },
-    { id: 'settings', label: 'Settings', icon: Settings },
+    { id: 'settings', label: 'Settings', icon: Settings, iconOnly: true }, // Settings icon only
   ];
 
   const handleLogout = async () => {
@@ -58,7 +58,7 @@ const Navigation: React.FC<NavigationProps> = ({
               />
             </div>
 
-            {/* Desktop Navigation */}
+            {/* Desktop Navigation - All items moved to right */}
             <div className="hidden lg:flex items-center space-x-1">
               {tabs.map((tab) => {
                 const Icon = tab.icon;
@@ -75,7 +75,8 @@ const Navigation: React.FC<NavigationProps> = ({
                     `}
                   >
                     <Icon size={18} />
-                    <span>{tab.label}</span>
+                    {/* Show text for all tabs except settings */}
+                    {!tab.iconOnly && <span>{tab.label}</span>}
                   </button>
                 );
               })}

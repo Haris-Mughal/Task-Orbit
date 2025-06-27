@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useVoiceAssistant } from './useVoiceAssistant';
 
 export interface MoodTheme {
   primary: string;
@@ -10,48 +11,49 @@ export interface MoodTheme {
 
 export function useMoodPersonalization() {
   const [loading, setLoading] = useState(false);
+  const { speak } = useVoiceAssistant();
 
   const getMoodTheme = (mood: string): MoodTheme => {
     switch (mood) {
       case 'happy':
         return {
           primary: 'from-yellow-400 to-orange-500',
-          secondary: 'from-yellow-50 to-orange-50',
-          background: 'bg-gradient-to-br from-yellow-50 via-orange-50 to-pink-50',
-          accent: 'text-yellow-600',
-          text: 'text-gray-800'
+          secondary: 'from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20',
+          background: 'bg-gradient-to-br from-yellow-50 via-orange-50 to-pink-50 dark:from-yellow-900/10 dark:via-orange-900/10 dark:to-pink-900/10',
+          accent: 'text-yellow-600 dark:text-yellow-400',
+          text: 'text-gray-800 dark:text-gray-200'
         };
       case 'amazing':
         return {
           primary: 'from-pink-400 to-rose-500',
-          secondary: 'from-pink-50 to-rose-50',
-          background: 'bg-gradient-to-br from-pink-50 via-rose-50 to-purple-50',
-          accent: 'text-pink-600',
-          text: 'text-gray-800'
+          secondary: 'from-pink-50 to-rose-50 dark:from-pink-900/20 dark:to-rose-900/20',
+          background: 'bg-gradient-to-br from-pink-50 via-rose-50 to-purple-50 dark:from-pink-900/10 dark:via-rose-900/10 dark:to-purple-900/10',
+          accent: 'text-pink-600 dark:text-pink-400',
+          text: 'text-gray-800 dark:text-gray-200'
         };
       case 'neutral':
         return {
           primary: 'from-blue-500 to-indigo-600',
-          secondary: 'from-blue-50 to-indigo-50',
-          background: 'bg-gray-50',
-          accent: 'text-blue-600',
-          text: 'text-gray-900'
+          secondary: 'from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20',
+          background: 'bg-gray-50 dark:bg-gray-900',
+          accent: 'text-blue-600 dark:text-blue-400',
+          text: 'text-gray-900 dark:text-gray-100'
         };
       case 'sad':
         return {
           primary: 'from-purple-400 to-indigo-500',
-          secondary: 'from-purple-50 to-indigo-50',
-          background: 'bg-gradient-to-br from-purple-50 to-indigo-50',
-          accent: 'text-purple-600',
-          text: 'text-gray-700'
+          secondary: 'from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20',
+          background: 'bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/10 dark:to-indigo-900/10',
+          accent: 'text-purple-600 dark:text-purple-400',
+          text: 'text-gray-700 dark:text-gray-300'
         };
       default:
         return {
           primary: 'from-purple-600 to-indigo-600',
-          secondary: 'from-purple-50 to-indigo-50',
-          background: 'bg-gray-50',
-          accent: 'text-purple-600',
-          text: 'text-gray-900'
+          secondary: 'from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20',
+          background: 'bg-gray-50 dark:bg-gray-900',
+          accent: 'text-purple-600 dark:text-purple-400',
+          text: 'text-gray-900 dark:text-gray-100'
         };
     }
   };
@@ -60,7 +62,7 @@ export function useMoodPersonalization() {
     setLoading(true);
     
     try {
-      // Simulate AI-generated quotes based on mood
+      // Enhanced AI-generated quotes based on mood with voice output
       const quotes = {
         happy: [
           "Your positive energy is lighting up everything around you! Keep shining and spreading those good vibes.",
@@ -95,10 +97,16 @@ export function useMoodPersonalization() {
       const moodQuotes = quotes[mood as keyof typeof quotes] || quotes.neutral;
       const randomQuote = moodQuotes[Math.floor(Math.random() * moodQuotes.length)];
       
+      // Speak the quote with appropriate tone
+      const rate = mood === 'amazing' ? 1.1 : mood === 'sad' ? 0.9 : 1.0;
+      speak(randomQuote, { rate });
+      
       return randomQuote;
     } catch (error) {
       console.error('Error generating mood quote:', error);
-      return "Remember, every day is a new opportunity to grow and achieve your goals!";
+      const fallback = "Remember, every day is a new opportunity to grow and achieve your goals!";
+      speak(fallback);
+      return fallback;
     } finally {
       setLoading(false);
     }
@@ -106,7 +114,7 @@ export function useMoodPersonalization() {
 
   const generateMoodSuggestion = async (mood: string): Promise<string> => {
     try {
-      // AI-generated suggestions for UI themes and productivity approaches
+      // AI-generated suggestions for UI themes and productivity approaches with voice
       const suggestions = {
         happy: [
           "Your bright energy calls for an equally vibrant experience! I've optimized your interface with warm, energizing colors and ambitious task suggestions. Perfect time to tackle those challenging projects you've been putting off!",
@@ -122,13 +130,13 @@ export function useMoodPersonalization() {
         ],
         neutral: [
           "Your balanced state is perfect for steady progress! I've created a clean, focused interface that supports methodical work and consistent habit-building.",
-          "Steady and centered - ideal for productivity! Your workspace now features calming blues and organized layouts that support sustained focus and planning.",
+          "Steady and centered - ideal for productivity! Your workspace now features calming themes and organized layouts that support sustained focus and planning.",
           "Your balanced energy calls for a harmonious approach. I've optimized your interface for routine tasks and long-term planning with clean, distraction-free design.",
           "Perfect equilibrium for consistent progress! Your workspace features balanced colors and structured layouts that support steady, sustainable productivity."
         ],
         sad: [
           "I understand you're having a tough day. I've simplified your interface with gentle, calming colors and broken down tasks into smaller, manageable steps. You've got this! 💜",
-          "Gentle support mode activated. Your workspace now features soothing purples and minimal distractions, focusing only on essential, bite-sized tasks that won't overwhelm you.",
+          "Gentle support mode activated. Your workspace now features soothing themes and minimal distractions, focusing only on essential, bite-sized tasks that won't overwhelm you.",
           "Taking care of you today. I've created a peaceful, supportive environment with soft colors and gentle reminders. Small steps are still progress - be kind to yourself.",
           "Your wellbeing comes first. I've minimized visual clutter and highlighted self-care activities alongside gentle, achievable tasks. You're stronger than you know."
         ]
@@ -137,10 +145,16 @@ export function useMoodPersonalization() {
       const moodSuggestions = suggestions[mood as keyof typeof suggestions] || suggestions.neutral;
       const randomSuggestion = moodSuggestions[Math.floor(Math.random() * moodSuggestions.length)];
       
+      // Speak the suggestion with appropriate tone
+      const rate = mood === 'amazing' ? 1.1 : mood === 'sad' ? 0.9 : 1.0;
+      speak(randomSuggestion, { rate });
+      
       return randomSuggestion;
     } catch (error) {
       console.error('Error generating mood suggestion:', error);
-      return "I've personalized your experience to match your current state. Remember, every mood is valid and temporary!";
+      const fallback = "I've personalized your experience to match your current state. Remember, every mood is valid and temporary!";
+      speak(fallback);
+      return fallback;
     }
   };
 

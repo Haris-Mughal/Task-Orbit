@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useVoiceAssistant } from './useVoiceAssistant';
 
 export interface MotivationalMessage {
   id: string;
@@ -9,11 +10,11 @@ export interface MotivationalMessage {
 
 export function useMotivation() {
   const [messages, setMessages] = useState<MotivationalMessage[]>([]);
+  const { speak } = useVoiceAssistant();
 
   const generatePepTalk = async (sessionType: 'focus' | 'break'): Promise<string> => {
     try {
-      // In a real implementation, this would call OpenAI's API
-      // For now, we'll use a curated set of motivational messages
+      // Enhanced motivational messages with voice output
       const focusCompleteMessages = [
         "🎉 Amazing focus! You just conquered 25 minutes of pure productivity. Your future self is already thanking you!",
         "💪 That's what I call laser focus! Take a well-deserved break and come back even stronger.",
@@ -43,12 +44,18 @@ export function useMotivation() {
       const messages = sessionType === 'focus' ? focusCompleteMessages : breakCompleteMessages;
       const randomMessage = messages[Math.floor(Math.random() * messages.length)];
       
+      // Speak the motivational message with enthusiasm
+      const rate = sessionType === 'focus' ? 1.1 : 1.0;
+      speak(randomMessage, { rate, pitch: 1.1 });
+      
       return randomMessage;
     } catch (error) {
       console.error('Error generating pep talk:', error);
-      return sessionType === 'focus' 
+      const fallback = sessionType === 'focus' 
         ? "🎉 Great job completing your focus session! Take a well-deserved break."
         : "⚡ Break complete! You're refreshed and ready for another productive session.";
+      speak(fallback);
+      return fallback;
     }
   };
 

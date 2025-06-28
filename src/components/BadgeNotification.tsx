@@ -45,32 +45,32 @@ const BadgeNotification: React.FC<BadgeNotificationProps> = ({
       case 'common':
         return {
           bg: 'bg-gradient-to-r from-gray-500 to-gray-600',
-          border: 'border-gray-300',
-          glow: 'shadow-gray-200',
+          border: 'border-gray-300 dark:border-gray-600',
+          glow: 'shadow-gray-200 dark:shadow-gray-800',
         };
       case 'rare':
         return {
           bg: 'bg-gradient-to-r from-blue-500 to-indigo-600',
-          border: 'border-blue-300',
-          glow: 'shadow-blue-200',
+          border: 'border-blue-300 dark:border-blue-600',
+          glow: 'shadow-blue-200 dark:shadow-blue-800',
         };
       case 'epic':
         return {
           bg: 'bg-gradient-to-r from-purple-500 to-pink-600',
-          border: 'border-purple-300',
-          glow: 'shadow-purple-200',
+          border: 'border-purple-300 dark:border-purple-600',
+          glow: 'shadow-purple-200 dark:shadow-purple-800',
         };
       case 'legendary':
         return {
           bg: 'bg-gradient-to-r from-yellow-400 to-orange-500',
-          border: 'border-yellow-300',
-          glow: 'shadow-yellow-200',
+          border: 'border-yellow-300 dark:border-yellow-600',
+          glow: 'shadow-yellow-200 dark:shadow-yellow-800',
         };
       default:
         return {
           bg: 'bg-gradient-to-r from-gray-500 to-gray-600',
-          border: 'border-gray-300',
-          glow: 'shadow-gray-200',
+          border: 'border-gray-300 dark:border-gray-600',
+          glow: 'shadow-gray-200 dark:shadow-gray-800',
         };
     }
   };
@@ -93,7 +93,7 @@ const BadgeNotification: React.FC<BadgeNotificationProps> = ({
       
       {/* Badge Card */}
       <div className={`
-        relative bg-white rounded-2xl shadow-2xl border-4 ${colors.border}
+        relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border-4 ${colors.border}
         p-8 max-w-md mx-4 text-center
         ${colors.glow} shadow-2xl
         animate-pulse
@@ -112,7 +112,7 @@ const BadgeNotification: React.FC<BadgeNotificationProps> = ({
         {/* Close Button */}
         <button
           onClick={handleDismiss}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors duration-200"
+          className="absolute top-4 right-4 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200"
         >
           <X size={20} />
         </button>
@@ -133,26 +133,26 @@ const BadgeNotification: React.FC<BadgeNotificationProps> = ({
         </div>
 
         {/* Badge Info */}
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">
+        <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
           {badge.name}
         </h3>
-        <p className="text-gray-600 mb-6">
+        <p className="text-gray-600 dark:text-gray-400 mb-6">
           {badge.description}
         </p>
 
         {/* Rarity Badge */}
         <div className={`
           inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide
-          ${badge.rarity === 'common' ? 'bg-gray-100 text-gray-700' : ''}
-          ${badge.rarity === 'rare' ? 'bg-blue-100 text-blue-700' : ''}
-          ${badge.rarity === 'epic' ? 'bg-purple-100 text-purple-700' : ''}
-          ${badge.rarity === 'legendary' ? 'bg-yellow-100 text-yellow-700' : ''}
+          ${badge.rarity === 'common' ? 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300' : ''}
+          ${badge.rarity === 'rare' ? 'bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300' : ''}
+          ${badge.rarity === 'epic' ? 'bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300' : ''}
+          ${badge.rarity === 'legendary' ? 'bg-yellow-100 dark:bg-yellow-900/50 text-yellow-700 dark:text-yellow-300' : ''}
         `}>
           {badge.rarity}
         </div>
 
         {/* Celebration Text */}
-        <div className="mt-6 text-sm text-gray-500">
+        <div className="mt-6 text-sm text-gray-500 dark:text-gray-400">
           🎉 Keep up the amazing work! 🎉
         </div>
       </div>

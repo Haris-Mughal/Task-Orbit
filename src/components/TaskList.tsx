@@ -52,12 +52,12 @@ const TaskList: React.FC<TaskListProps> = ({
 
   const getPriorityColor = (priority: number) => {
     switch (priority) {
-      case 5: return 'text-red-600 bg-red-50 border-red-200';
-      case 4: return 'text-orange-600 bg-orange-50 border-orange-200';
-      case 3: return 'text-yellow-600 bg-yellow-50 border-yellow-200';
-      case 2: return 'text-blue-600 bg-blue-50 border-blue-200';
-      case 1: return 'text-gray-600 bg-gray-50 border-gray-200';
-      default: return 'text-gray-600 bg-gray-50 border-gray-200';
+      case 5: return 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30 border-red-200 dark:border-red-700';
+      case 4: return 'text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/30 border-orange-200 dark:border-orange-700';
+      case 3: return 'text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/30 border-yellow-200 dark:border-yellow-700';
+      case 2: return 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 border-blue-200 dark:border-blue-700';
+      case 1: return 'text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-600';
+      default: return 'text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-600';
     }
   };
 
@@ -81,12 +81,12 @@ const TaskList: React.FC<TaskListProps> = ({
     return (
       <div className="space-y-3">
         {[...Array(3)].map((_, i) => (
-          <div key={i} className="bg-white p-4 rounded-lg border border-gray-200 animate-pulse">
+          <div key={i} className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 animate-pulse">
             <div className="flex items-center space-x-3">
-              <div className="w-5 h-5 bg-gray-200 rounded-full"></div>
+              <div className="w-5 h-5 bg-gray-200 dark:bg-gray-600 rounded-full"></div>
               <div className="flex-1">
-                <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+                <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded w-3/4 mb-2"></div>
+                <div className="h-3 bg-gray-200 dark:bg-gray-600 rounded w-1/2"></div>
               </div>
             </div>
           </div>
@@ -98,9 +98,9 @@ const TaskList: React.FC<TaskListProps> = ({
   if (tasks.length === 0) {
     return (
       <div className="text-center py-12">
-        <Circle className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-        <h3 className="text-lg font-medium text-gray-900 mb-2">No tasks yet</h3>
-        <p className="text-gray-600">Create your first task using natural language above</p>
+        <Circle className="w-16 h-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">No tasks yet</h3>
+        <p className="text-gray-600 dark:text-gray-400">Create your first task using natural language above</p>
       </div>
     );
   }
@@ -111,12 +111,12 @@ const TaskList: React.FC<TaskListProps> = ({
         <div
           key={task.id}
           className={`
-            bg-white p-4 rounded-lg border transition-all duration-200 hover:shadow-md
+            bg-white dark:bg-gray-800 p-4 rounded-lg border transition-all duration-200 hover:shadow-md
             ${task.completed 
-              ? 'border-green-200 bg-green-50' 
+              ? 'border-green-200 dark:border-green-700 bg-green-50 dark:bg-green-900/20' 
               : isOverdue(task.due_date) 
-                ? 'border-red-200 bg-red-50' 
-                : 'border-gray-200'
+                ? 'border-red-200 dark:border-red-700 bg-red-50 dark:bg-red-900/20' 
+                : 'border-gray-200 dark:border-gray-700'
             }
           `}
         >
@@ -126,8 +126,8 @@ const TaskList: React.FC<TaskListProps> = ({
               className={`
                 mt-0.5 transition-colors duration-200
                 ${task.completed 
-                  ? 'text-green-600 hover:text-green-700' 
-                  : 'text-gray-400 hover:text-purple-600'
+                  ? 'text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300' 
+                  : 'text-gray-400 dark:text-gray-500 hover:text-purple-600 dark:hover:text-purple-400'
                 }
               `}
             >
@@ -140,8 +140,8 @@ const TaskList: React.FC<TaskListProps> = ({
 
             <div className="flex-1 min-w-0">
               <h3 className={`
-                font-medium text-gray-900 mb-1
-                ${task.completed ? 'line-through text-gray-500' : ''}
+                font-medium text-gray-900 dark:text-gray-100 mb-1
+                ${task.completed ? 'line-through text-gray-500 dark:text-gray-400' : ''}
               `}>
                 {task.title}
               </h3>
@@ -151,8 +151,8 @@ const TaskList: React.FC<TaskListProps> = ({
                   <div className={`
                     flex items-center space-x-1
                     ${isOverdue(task.due_date) && !task.completed 
-                      ? 'text-red-600' 
-                      : 'text-gray-600'
+                      ? 'text-red-600 dark:text-red-400' 
+                      : 'text-gray-600 dark:text-gray-400'
                     }
                   `}>
                     <Calendar size={14} />
@@ -166,7 +166,7 @@ const TaskList: React.FC<TaskListProps> = ({
                   </div>
                 )}
 
-                <div className="flex items-center space-x-1 text-gray-600">
+                <div className="flex items-center space-x-1 text-gray-600 dark:text-gray-400">
                   <Tag size={14} />
                   <span>{task.category}</span>
                 </div>
@@ -182,7 +182,7 @@ const TaskList: React.FC<TaskListProps> = ({
 
             <button
               onClick={() => onDeleteTask(task.id)}
-              className="text-gray-400 hover:text-red-600 transition-colors duration-200 p-1"
+              className="text-gray-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200 p-1"
             >
               <Trash2 size={16} />
             </button>

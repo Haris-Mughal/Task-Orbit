@@ -110,6 +110,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
+      {/* PURE BLACK BACKGROUND FOR DARK MODE - No mood themes in dark mode */}
       <div className="space-y-8 min-h-screen -m-8 p-8">
         {/* Welcome Section */}
         <div className={`text-center py-8 bg-gradient-to-br ${moodTheme.secondary} rounded-2xl border-2 border-white/50 dark:border-gray-800/50 backdrop-blur-sm`}>

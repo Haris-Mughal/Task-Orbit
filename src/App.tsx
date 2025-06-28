@@ -86,10 +86,10 @@ function App() {
   const currentMood = profile?.mood || 'neutral';
   const moodTheme = getMoodTheme(currentMood);
 
-  // Override mood background for dark mode to ensure pure black
+  // PURE BLACK BACKGROUND FOR DARK MODE - Override everything
   const getBackgroundClass = () => {
     if (isDarkMode) {
-      return 'bg-black'; // Pure black for dark mode
+      return 'bg-black'; // PURE BLACK - no gradients, no mood themes in dark mode
     }
     // Light mode - use mood themes or default light
     return currentMood !== 'neutral' ? moodTheme.background : 'bg-gray-50';

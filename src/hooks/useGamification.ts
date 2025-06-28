@@ -278,11 +278,11 @@ export function useGamification(userId?: string) {
 
   const getBadgeRarityColor = (rarity: Badge['rarity']) => {
     switch (rarity) {
-      case 'common': return 'text-gray-600 bg-gray-100';
-      case 'rare': return 'text-blue-600 bg-blue-100';
-      case 'epic': return 'text-purple-600 bg-purple-100';
-      case 'legendary': return 'text-yellow-600 bg-yellow-100';
-      default: return 'text-gray-600 bg-gray-100';
+      case 'common': return 'text-gray-600 bg-gray-100 dark:text-gray-400 dark:bg-gray-800';
+      case 'rare': return 'text-blue-600 bg-blue-100 dark:text-blue-400 dark:bg-blue-900/50';
+      case 'epic': return 'text-purple-600 bg-purple-100 dark:text-purple-400 dark:bg-purple-900/50';
+      case 'legendary': return 'text-yellow-600 bg-yellow-100 dark:text-yellow-400 dark:bg-yellow-900/50';
+      default: return 'text-gray-600 bg-gray-100 dark:text-gray-400 dark:bg-gray-800';
     }
   };
 

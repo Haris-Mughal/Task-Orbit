@@ -86,8 +86,17 @@ function App() {
   const currentMood = profile?.mood || 'neutral';
   const moodTheme = getMoodTheme(currentMood);
 
+  // Override mood background for dark mode to ensure pure black
+  const getBackgroundClass = () => {
+    if (isDarkMode) {
+      return 'bg-black'; // Pure black for dark mode
+    }
+    // Light mode - use mood themes or default light
+    return currentMood !== 'neutral' ? moodTheme.background : 'bg-gray-50';
+  };
+
   return (
-    <div className={`min-h-screen flex flex-col ${currentMood !== 'neutral' ? moodTheme.background : 'bg-gray-50 dark:bg-black'}`}>
+    <div className={`min-h-screen flex flex-col ${getBackgroundClass()}`}>
       <Navigation 
         activeTab={activeTab} 
         onTabChange={setActiveTab}

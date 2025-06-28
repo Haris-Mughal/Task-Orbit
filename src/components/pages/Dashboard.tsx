@@ -110,7 +110,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-      <div className={`space-y-8 ${currentMood !== 'neutral' ? moodTheme.background : 'bg-gray-50 dark:bg-black'} min-h-screen -m-8 p-8`}>
+      <div className="space-y-8 min-h-screen -m-8 p-8">
         {/* Welcome Section */}
         <div className={`text-center py-8 bg-gradient-to-br ${moodTheme.secondary} rounded-2xl border-2 border-white/50 dark:border-gray-800/50 backdrop-blur-sm`}>
           <div className="flex justify-center mb-4">

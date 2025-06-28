@@ -93,7 +93,7 @@ const Tasks: React.FC = () => {
   };
 
   return (
-    <div className={`space-y-6 ${moodTheme.background} min-h-screen -m-8 p-8`}>
+    <div className="space-y-6 min-h-screen -m-8 p-8">
       <div className="text-center">
         <h2 className={`text-2xl font-bold ${moodTheme.text}`}>{getMoodTitle()}</h2>
         <p className={`${moodTheme.text} opacity-80`}>{getMoodSubtitle()}</p>

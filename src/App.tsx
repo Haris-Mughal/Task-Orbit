@@ -15,7 +15,7 @@ import AuthForm from './components/AuthForm';
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false); // Default to light theme
   const { user, loading: authLoading } = useAuth();
   const { profile } = useUser(user?.id);
   const { getMoodTheme } = useMoodPersonalization();
@@ -25,11 +25,9 @@ function App() {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
       setIsDarkMode(true);
-    } else if (savedTheme === 'light') {
-      setIsDarkMode(false);
     } else {
-      // Auto-detect system preference
-      setIsDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
+      // Default to light theme
+      setIsDarkMode(false);
     }
   }, []);
 
@@ -69,8 +67,8 @@ function App() {
   // Show loading state
   if (authLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-black">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 dark:border-purple-400"></div>
       </div>
     );
   }
@@ -78,7 +76,7 @@ function App() {
   // Show auth form without header/footer if user is not authenticated
   if (!user) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-gray-50 dark:bg-black flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <AuthForm />
       </div>
     );
@@ -89,7 +87,7 @@ function App() {
   const moodTheme = getMoodTheme(currentMood);
 
   return (
-    <div className={`min-h-screen flex flex-col ${currentMood !== 'neutral' ? moodTheme.background : 'bg-gray-50 dark:bg-gray-900'}`}>
+    <div className={`min-h-screen flex flex-col ${currentMood !== 'neutral' ? moodTheme.background : 'bg-gray-50 dark:bg-black'}`}>
       <Navigation 
         activeTab={activeTab} 
         onTabChange={setActiveTab}

@@ -101,7 +101,7 @@ const Tasks: React.FC = () => {
 
       {/* Mood-based encouragement for sad users */}
       {currentMood === 'sad' && (
-        <div className="bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 p-4 rounded-xl">
+        <div className="bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-800 p-4 rounded-xl">
           <div className="flex items-center space-x-3">
             <span className="text-2xl">💜</span>
             <div>
@@ -113,7 +113,7 @@ const Tasks: React.FC = () => {
       )}
 
       {/* Task Input */}
-      <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-xl border border-white/50 dark:border-gray-700/50 shadow-sm">
+      <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-6 rounded-xl border border-white/50 dark:border-gray-800/50 shadow-sm">
         <TaskInput 
           onTaskCreated={handleTaskCreated}
           loading={tasksLoading}
@@ -122,19 +122,19 @@ const Tasks: React.FC = () => {
 
       {/* Task Statistics */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-4 rounded-lg border border-white/50 dark:border-gray-700/50 text-center hover:bg-white/90 dark:hover:bg-gray-800/90 transition-all duration-200">
+        <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-4 rounded-lg border border-white/50 dark:border-gray-800/50 text-center hover:bg-white/90 dark:hover:bg-gray-900/90 transition-all duration-200">
           <div className={`text-2xl font-bold ${moodTheme.accent}`}>
             {tasks.filter(t => !t.completed).length}
           </div>
           <div className="text-sm text-gray-600 dark:text-gray-400">Active Tasks</div>
         </div>
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-4 rounded-lg border border-white/50 dark:border-gray-700/50 text-center hover:bg-white/90 dark:hover:bg-gray-800/90 transition-all duration-200">
+        <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-4 rounded-lg border border-white/50 dark:border-gray-800/50 text-center hover:bg-white/90 dark:hover:bg-gray-900/90 transition-all duration-200">
           <div className="text-2xl font-bold text-green-600 dark:text-green-400">
             {tasks.filter(t => t.completed).length}
           </div>
           <div className="text-sm text-gray-600 dark:text-gray-400">Completed</div>
         </div>
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-4 rounded-lg border border-white/50 dark:border-gray-700/50 text-center hover:bg-white/90 dark:hover:bg-gray-800/90 transition-all duration-200">
+        <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-4 rounded-lg border border-white/50 dark:border-gray-800/50 text-center hover:bg-white/90 dark:hover:bg-gray-900/90 transition-all duration-200">
           <div className={`text-2xl font-bold ${moodTheme.text}`}>
             {tasks.length}
           </div>
@@ -143,7 +143,7 @@ const Tasks: React.FC = () => {
       </div>
 
       {/* Task List */}
-      <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-xl border border-white/50 dark:border-gray-700/50 shadow-sm">
+      <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-6 rounded-xl border border-white/50 dark:border-gray-800/50 shadow-sm">
         <div className="flex items-center justify-between mb-4">
           <h3 className={`text-lg font-semibold ${moodTheme.text}`}>Your Tasks</h3>
           {currentMood === 'sad' && tasks.length > taskLimit && (
@@ -161,7 +161,7 @@ const Tasks: React.FC = () => {
         
         {/* Show hidden tasks message for sad mood */}
         {currentMood === 'sad' && tasks.length > taskLimit && (
-          <div className="mt-4 p-4 bg-purple-50 dark:bg-purple-900/30 rounded-lg border border-purple-200 dark:border-purple-700">
+          <div className="mt-4 p-4 bg-purple-50 dark:bg-purple-900/30 rounded-lg border border-purple-200 dark:border-purple-800">
             <p className="text-sm text-purple-700 dark:text-purple-300 text-center">
               💜 {tasks.length - taskLimit} more tasks are hidden to keep things manageable today. 
               <br />

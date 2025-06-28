@@ -42,15 +42,15 @@ const Achievements: React.FC = () => {
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">Achievements</h2>
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Achievements</h2>
         <p className="text-gray-600 dark:text-gray-400">Track your progress and unlock amazing badges</p>
       </div>
 
       {/* Progress Overview */}
       <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 p-8 rounded-2xl border border-purple-200 dark:border-purple-800">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-xl font-bold text-purple-900 dark:text-purple-100">Your Journey</h3>
-          <div className="text-sm text-purple-700 dark:text-purple-300 font-medium">
+          <h3 className="text-xl font-bold text-purple-900 dark:text-purple-300">Your Journey</h3>
+          <div className="text-sm text-purple-700 dark:text-purple-400 font-medium">
             {earnedBadges.length} / {earnedBadges.length + availableBadges.length} badges earned
           </div>
         </div>
@@ -66,20 +66,20 @@ const Achievements: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
           <div className="text-center">
-            <div className="text-2xl font-bold text-purple-900 dark:text-purple-100">{earnedBadges.length}</div>
-            <div className="text-sm text-purple-700 dark:text-purple-300">Badges Earned</div>
+            <div className="text-2xl font-bold text-purple-900 dark:text-purple-300">{earnedBadges.length}</div>
+            <div className="text-sm text-purple-700 dark:text-purple-400">Badges Earned</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-purple-900 dark:text-purple-100">
+            <div className="text-2xl font-bold text-purple-900 dark:text-purple-300">
               {earnedBadges.filter(b => b.rarity === 'legendary' || b.rarity === 'epic').length}
             </div>
-            <div className="text-sm text-purple-700 dark:text-purple-300">Rare+ Badges</div>
+            <div className="text-sm text-purple-700 dark:text-purple-400">Rare+ Badges</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-purple-900 dark:text-purple-100">
+            <div className="text-2xl font-bold text-purple-900 dark:text-purple-300">
               {achievements.reduce((acc, a) => acc + a.progress, 0)}
             </div>
-            <div className="text-sm text-purple-700 dark:text-purple-300">Total Progress</div>
+            <div className="text-sm text-purple-700 dark:text-purple-400">Total Progress</div>
           </div>
         </div>
       </div>
@@ -87,12 +87,12 @@ const Achievements: React.FC = () => {
       {/* Current Progress */}
       {achievements.length > 0 && (
         <div className="space-y-4">
-          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Current Progress</h3>
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white">Current Progress</h3>
           {achievements.map((achievement) => (
-            <div key={achievement.id} className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-200">
+            <div key={achievement.id} className="bg-white dark:bg-gray-900 p-6 rounded-xl border border-gray-200 dark:border-gray-800 hover:shadow-lg transition-shadow duration-200">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
-                  <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-1">{achievement.title}</h4>
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-1">{achievement.title}</h4>
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">{achievement.description}</p>
                   
                   <div className="flex items-center space-x-3">
@@ -131,16 +131,16 @@ const Achievements: React.FC = () => {
       {/* Earned Badges */}
       {earnedBadges.length > 0 && (
         <div className="space-y-4">
-          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Earned Badges</h3>
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white">Earned Badges</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {earnedBadges.map((badge) => (
               <div
                 key={badge.id}
-                className="bg-white dark:bg-gray-800 p-6 rounded-xl border-2 border-green-200 dark:border-green-700 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 hover:shadow-lg transition-all duration-200 transform hover:scale-105"
+                className="bg-white dark:bg-gray-900 p-6 rounded-xl border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 hover:shadow-lg transition-all duration-200 transform hover:scale-105"
               >
                 <div className="text-center">
                   <div className="text-4xl mb-3">{badge.icon}</div>
-                  <h4 className="font-bold text-gray-900 dark:text-gray-100 mb-2">{badge.name}</h4>
+                  <h4 className="font-bold text-gray-900 dark:text-white mb-2">{badge.name}</h4>
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">{badge.description}</p>
                   
                   <div className="flex items-center justify-center space-x-2">
@@ -165,12 +165,12 @@ const Achievements: React.FC = () => {
       {/* Available Badges */}
       {availableBadges.length > 0 && (
         <div className="space-y-4">
-          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Available Badges</h3>
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white">Available Badges</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {availableBadges.slice(0, 12).map((badge) => (
               <div
                 key={badge.id}
-                className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-md transition-all duration-200 opacity-75 hover:opacity-100"
+                className="bg-white dark:bg-gray-900 p-6 rounded-xl border border-gray-200 dark:border-gray-800 hover:shadow-md transition-all duration-200 opacity-75 hover:opacity-100"
               >
                 <div className="text-center">
                   <div className="text-4xl mb-3 grayscale">{badge.icon}</div>
@@ -200,7 +200,7 @@ const Achievements: React.FC = () => {
       {earnedBadges.length === 0 && availableBadges.length === 0 && (
         <div className="text-center py-12">
           <Trophy className="w-16 h-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
-          <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">No badges yet</h3>
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No badges yet</h3>
           <p className="text-gray-600 dark:text-gray-400">Complete tasks and build streaks to earn your first badges!</p>
         </div>
       )}

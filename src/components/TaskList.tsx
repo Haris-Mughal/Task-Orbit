@@ -81,12 +81,12 @@ const TaskList: React.FC<TaskListProps> = ({
     return (
       <div className="space-y-3">
         {[...Array(3)].map((_, i) => (
-          <div key={i} className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 animate-pulse">
+          <div key={i} className="bg-white dark:bg-gray-900 p-4 rounded-lg border border-gray-200 dark:border-gray-800 animate-pulse">
             <div className="flex items-center space-x-3">
-              <div className="w-5 h-5 bg-gray-200 dark:bg-gray-600 rounded-full"></div>
+              <div className="w-5 h-5 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
               <div className="flex-1">
-                <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded w-3/4 mb-2"></div>
-                <div className="h-3 bg-gray-200 dark:bg-gray-600 rounded w-1/2"></div>
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2"></div>
+                <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
               </div>
             </div>
           </div>
@@ -99,7 +99,7 @@ const TaskList: React.FC<TaskListProps> = ({
     return (
       <div className="text-center py-12">
         <Circle className="w-16 h-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
-        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">No tasks yet</h3>
+        <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No tasks yet</h3>
         <p className="text-gray-600 dark:text-gray-400">Create your first task using natural language above</p>
       </div>
     );
@@ -111,12 +111,12 @@ const TaskList: React.FC<TaskListProps> = ({
         <div
           key={task.id}
           className={`
-            bg-white dark:bg-gray-800 p-4 rounded-lg border transition-all duration-200 hover:shadow-md
+            bg-white dark:bg-gray-900 p-4 rounded-lg border transition-all duration-200 hover:shadow-md
             ${task.completed 
-              ? 'border-green-200 dark:border-green-700 bg-green-50 dark:bg-green-900/20' 
+              ? 'border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900/20' 
               : isOverdue(task.due_date) 
-                ? 'border-red-200 dark:border-red-700 bg-red-50 dark:bg-red-900/20' 
-                : 'border-gray-200 dark:border-gray-700'
+                ? 'border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20' 
+                : 'border-gray-200 dark:border-gray-800'
             }
           `}
         >
@@ -140,7 +140,7 @@ const TaskList: React.FC<TaskListProps> = ({
 
             <div className="flex-1 min-w-0">
               <h3 className={`
-                font-medium text-gray-900 dark:text-gray-100 mb-1
+                font-medium text-gray-900 dark:text-white mb-1
                 ${task.completed ? 'line-through text-gray-500 dark:text-gray-400' : ''}
               `}>
                 {task.title}

@@ -213,7 +213,7 @@ const TaskInput: React.FC<TaskInputProps> = ({ onTaskCreated, loading = false })
             value={taskInput}
             onChange={(e) => setTaskInput(e.target.value)}
             placeholder="Describe your task in natural language..."
-            className="w-full pl-10 pr-16 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 focus:border-transparent text-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
+            className="w-full pl-10 pr-16 py-4 border border-gray-300 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 focus:border-transparent text-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
             disabled={isProcessing || loading || isListening}
           />
           {isSupported && (

@@ -110,11 +110,11 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-      <div className={`space-y-8 ${moodTheme.background} min-h-screen -m-8 p-8`}>
+      <div className={`space-y-8 ${currentMood !== 'neutral' ? moodTheme.background : 'bg-gray-50 dark:bg-black'} min-h-screen -m-8 p-8`}>
         {/* Welcome Section */}
-        <div className={`text-center py-8 bg-gradient-to-br ${moodTheme.secondary} rounded-2xl border-2 border-white/50 dark:border-gray-700/50 backdrop-blur-sm`}>
+        <div className={`text-center py-8 bg-gradient-to-br ${moodTheme.secondary} rounded-2xl border-2 border-white/50 dark:border-gray-800/50 backdrop-blur-sm`}>
           <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 bg-white dark:bg-gray-800 rounded-2xl flex items-center justify-center shadow-lg p-2 border border-gray-200 dark:border-gray-600">
+            <div className="w-16 h-16 bg-white dark:bg-gray-900 rounded-2xl flex items-center justify-center shadow-lg p-2 border border-gray-200 dark:border-gray-800">
               <img 
                 src="/Untitled_design__4_-removebg-preview.png" 
                 alt="TaskOrbit" 
@@ -131,7 +131,7 @@ const Dashboard: React.FC = () => {
           
           {/* Mood Indicator */}
           {currentMood !== 'neutral' && (
-            <div className={`mt-4 inline-flex items-center space-x-2 px-4 py-2 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-full border border-white/50 dark:border-gray-600/50`}>
+            <div className={`mt-4 inline-flex items-center space-x-2 px-4 py-2 bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm rounded-full border border-white/50 dark:border-gray-800/50`}>
               <span className="text-lg">
                 {currentMood === 'happy' ? '😊' : 
                  currentMood === 'amazing' ? '🤩' : 
@@ -145,7 +145,7 @@ const Dashboard: React.FC = () => {
           
           {/* Streak Display */}
           {profile?.streak_count && profile.streak_count > 0 && (
-            <div className="mt-4 inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-orange-100 to-red-100 dark:from-orange-900/50 dark:to-red-900/50 rounded-full border border-orange-200 dark:border-orange-700 ml-2">
+            <div className="mt-4 inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-orange-100 to-red-100 dark:from-orange-900/50 dark:to-red-900/50 rounded-full border border-orange-200 dark:border-orange-800 ml-2">
               <span className="text-2xl">🔥</span>
               <span className="font-bold text-orange-800 dark:text-orange-300">
                 {profile.streak_count} day streak!
@@ -156,13 +156,13 @@ const Dashboard: React.FC = () => {
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-xl border border-white/50 dark:border-gray-700/50 hover:shadow-lg transition-all duration-200 hover:bg-white/90 dark:hover:bg-gray-800/90">
+          <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-6 rounded-xl border border-white/50 dark:border-gray-800/50 hover:shadow-lg transition-all duration-200 hover:bg-white/90 dark:hover:bg-gray-900/90">
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/50 rounded-lg flex items-center justify-center">
                 <CheckCircle className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
               </div>
               <div>
-                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
                   {tasksLoading ? '...' : completedTasks}
                 </p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Completed</p>
@@ -170,13 +170,13 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-xl border border-white/50 dark:border-gray-700/50 hover:shadow-lg transition-all duration-200 hover:bg-white/90 dark:hover:bg-gray-800/90">
+          <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-6 rounded-xl border border-white/50 dark:border-gray-800/50 hover:shadow-lg transition-all duration-200 hover:bg-white/90 dark:hover:bg-gray-900/90">
             <div className="flex items-center space-x-3">
               <div className={`w-12 h-12 bg-gradient-to-br ${moodTheme.secondary} rounded-lg flex items-center justify-center`}>
                 <Target className={`w-6 h-6 ${moodTheme.accent}`} />
               </div>
               <div>
-                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
                   {tasksLoading ? '...' : activeTasks}
                 </p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Active Tasks</p>
@@ -184,13 +184,13 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-xl border border-white/50 dark:border-gray-700/50 hover:shadow-lg transition-all duration-200 hover:bg-white/90 dark:hover:bg-gray-800/90">
+          <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-6 rounded-xl border border-white/50 dark:border-gray-800/50 hover:shadow-lg transition-all duration-200 hover:bg-white/90 dark:hover:bg-gray-900/90">
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/50 rounded-lg flex items-center justify-center">
                 <Calendar className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
               </div>
               <div>
-                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
                   {tasksLoading ? '...' : todayTasks.length}
                 </p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Due Today</p>
@@ -198,13 +198,13 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-xl border border-white/50 dark:border-gray-700/50 hover:shadow-lg transition-all duration-200 hover:bg-white/90 dark:hover:bg-gray-800/90">
+          <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-6 rounded-xl border border-white/50 dark:border-gray-800/50 hover:shadow-lg transition-all duration-200 hover:bg-white/90 dark:hover:bg-gray-900/90">
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/50 rounded-lg flex items-center justify-center">
                 <TrendingUp className="w-6 h-6 text-orange-600 dark:text-orange-400" />
               </div>
               <div>
-                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
                   {profileLoading ? '...' : profile?.streak_count || 0}
                 </p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Day Streak</p>
@@ -214,7 +214,7 @@ const Dashboard: React.FC = () => {
         </div>
 
         {/* Today's Focus Orbit */}
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-xl border border-white/50 dark:border-gray-700/50">
+        <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-8 rounded-xl border border-white/50 dark:border-gray-800/50">
           <div className="flex items-center justify-between mb-6">
             <h3 className={`text-xl font-semibold ${moodTheme.text}`}>
               {currentMood === 'sad' ? 'Gentle Progress Today' : 
@@ -233,7 +233,7 @@ const Dashboard: React.FC = () => {
               {focusTasks.map((task, index) => (
                 <div
                   key={task.id}
-                  className={`flex items-center space-x-4 p-4 bg-gradient-to-r ${moodTheme.secondary} rounded-lg border border-white/50 dark:border-gray-700/50 backdrop-blur-sm hover:bg-white/70 dark:hover:bg-gray-800/70 transition-all duration-200`}
+                  className={`flex items-center space-x-4 p-4 bg-gradient-to-r ${moodTheme.secondary} rounded-lg border border-white/50 dark:border-gray-800/50 backdrop-blur-sm hover:bg-white/70 dark:hover:bg-gray-900/70 transition-all duration-200`}
                 >
                   <div className={`w-8 h-8 bg-gradient-to-br ${moodTheme.primary} rounded-full flex items-center justify-center shadow-sm`}>
                     <span className="text-white font-semibold text-sm">{index + 1}</span>
@@ -271,7 +271,7 @@ const Dashboard: React.FC = () => {
               
               {/* Mood-based encouragement */}
               {currentMood === 'sad' && (
-                <div className="mt-4 p-4 bg-purple-50 dark:bg-purple-900/30 rounded-lg border border-purple-200 dark:border-purple-700">
+                <div className="mt-4 p-4 bg-purple-50 dark:bg-purple-900/30 rounded-lg border border-purple-200 dark:border-purple-800">
                   <p className="text-sm text-purple-700 dark:text-purple-300 text-center">
                     💜 Remember: Small steps are still progress. You're doing great by showing up today.
                   </p>
@@ -279,7 +279,7 @@ const Dashboard: React.FC = () => {
               )}
             </div>
           ) : (
-            <div className="flex items-center justify-center py-12 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg bg-white/50 dark:bg-gray-800/50">
+            <div className="flex items-center justify-center py-12 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg bg-white/50 dark:bg-gray-900/50">
               <div className="text-center">
                 <Rocket className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
                 <p className="text-gray-600 dark:text-gray-400 font-medium">
